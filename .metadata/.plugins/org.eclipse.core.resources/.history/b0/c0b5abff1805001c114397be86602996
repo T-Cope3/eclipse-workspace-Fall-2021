@@ -1,0 +1,31 @@
+package aI_Project;
+
+import java.util.Scanner;
+
+/*
+ * Goal: create a user input loop which allows for interpretation of math
+ * Needed: file storing and parsing, csv is fine.
+ * Needed: actual equation parser, user input parser
+ * Needed: Hashmap for table, and calculate method, STATE 1 -> lookup, STATE 2 -> calculate & store
+ * Needed: Input proofing when parsing
+ */
+
+public class AI_Main 
+{
+
+	public static void main(String[] args) 
+	{
+		String userInput;
+		Scanner scan = new Scanner(System.in);
+		
+		
+		do 
+		{
+			System.out.println("Please enter your equation in text form.\nWhen you are finished type: \"I am done.\"");
+			userInput = scan.nextLine();
+		}
+		while(!userInput.toLowerCase().equals("i am done."));
+
+	}
+
+}

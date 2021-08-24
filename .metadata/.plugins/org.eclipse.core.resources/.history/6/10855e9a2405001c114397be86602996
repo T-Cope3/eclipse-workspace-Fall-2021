@@ -1,0 +1,139 @@
+package aI_Project;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+
+/*
+ * Goal: create a user input loop which allows for interpretation of math
+ * Needed: file storing and parsing, csv is fine.
+ * Needed: actual equation parser, user input parser
+ * Needed: Hashmap for table, and calculate method, STATE 1 -> lookup, STATE 2 -> calculate & store
+ * Needed: Input proofing when parsing
+ */
+
+
+
+public class AI_Main 
+{
+
+	public static String fileName = "calculateHistory.csv";
+	
+	public static void main(String[] args) 
+	{
+		String userInput;
+		Scanner scan = new Scanner(System.in);
+		HashMap<String, String> pandas = new HashMap<String, String>();
+		pandas.put("First Key", "First Value");
+		pandas.put("Second Key", "Second Value");
+		
+		/*
+		do 
+		{
+			System.out.println("Please enter your equation in text form, excluding numbers."
+					+ "\nAn example would be: integral from 2 to 6 of x with respect to x."
+					+ "\nWhen you are finished type: \"I am done\"");
+			userInput = scan.nextLine();
+			//this is where the parsing function would be called
+		}
+		while(!userInput.toLowerCase().equals("i am done"));
+		*/
+		recordHistory(pandas);
+		parseHistory();
+		recordHistory(parseHistory());
+		parseHistory();
+	}
+	
+	//used only for testing until or at the end of the program
+	//read in HashMap and parses it
+	public static void recordHistory(HashMap<String, String> aIRecord)
+	{
+		//boolean append = false;
+		try {
+		      File myObj = new File(fileName);
+		      if (myObj.createNewFile()) 
+		      {
+		        System.out.println("File created as: " + myObj.getName());
+		      }
+		      else 
+		      {
+		        System.out.println("File currently exists.");
+		       // append = true;
+		      }
+		    } 
+		catch (IOException e) 
+		{
+		      System.out.println("File creation led to an error.");
+		      e.printStackTrace();
+		}
+		
+		try 
+		{
+			//can use , append in constructor but as of now unnecessary
+	      FileWriter outputStream = new FileWriter(fileName);
+	      BufferedWriter myWriter = new BufferedWriter(outputStream);
+	      
+	      //because of how written, need to parse keys and values into separate arrays
+	      for(String i : aIRecord.keySet())
+	    	  myWriter.write(i+",");
+	   
+	      myWriter.newLine();
+	      
+	      for(String i: aIRecord.values())
+	    	  myWriter.write(i+",");
+	      
+	      myWriter.newLine();
+	      
+	      myWriter.close();
+	      
+	      System.out.println("File written to.");
+		}
+		catch (IOException e) 
+		{
+	      System.out.println("File writing has caused an error.");
+	      e.printStackTrace();
+		}
+	}
+	
+	public static HashMap parseHistory()
+	{
+		 try {
+		      File myObj = new File(fileName);
+		      Scanner fileReader = new Scanner(myObj);
+		      ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+		      
+		      for(int i = 0; fileReader.hasNext(); i++)
+		      {
+		    	data.add(new ArrayList<String>());
+		        data.get(i).addAll(Arrays.asList(fileReader.nextLine().split(",")));
+		        System.out.println(data);
+		      }
+		      
+		      fileReader.close();
+		      
+		      HashMap<String, String> currentHistory = new HashMap<String, String>();
+		      for(int j = 0; j < data.size(); j+=2)
+		    	  for(int i = 0; i < data.get(j).size(); i++)
+		    	  {
+		    		  currentHistory.put(data.get(j).get(i), data.get(j+1).get(i));
+		    	  }
+		      
+		      System.out.println(currentHistory);
+		      return currentHistory;
+		    } 
+		 catch (FileNotFoundException e) 
+		 {
+	      System.out.println("An error occurred.");
+	      e.printStackTrace();
+	    }
+		 
+		 return null;
+	}
+}
