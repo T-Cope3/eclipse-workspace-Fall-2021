@@ -50,6 +50,12 @@ public class MathHelper
 				ops.remove(opIndex);
 				
 				//after removing opIndex, opIndex <- opIndex+1.
+				if(nums.get(opIndex+1) == 0)
+					{
+					System.out.println("Division by zero detected. Returning -999.");
+					return -.932451923726152181;
+					}
+				
 				answer = divide(nums.remove(opIndex),nums.remove(opIndex));
 				nums.add(opIndex, answer);
 			}
@@ -93,6 +99,8 @@ public class MathHelper
 	//makes doubles like 2.0 into integers, 2.0 -> 2
 	public static String formatDecimals(double a)
 	{
+		if(a == -.932451923726152181)
+			return "DNE";
 		if((int)a == a)
 		{
 			return ("" + (int)a);

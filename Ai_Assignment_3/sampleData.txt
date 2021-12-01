@@ -1,0 +1,32 @@
+IPhone,60,6
+Blender,40,10
+Kettle,10,20
+Ring,50,1
+Power Drill,50,25
+TV,130,50
+Prescriptions,30,2
+Cash,100,0
+Earrings,50,4
+Watch,70,3
+Wallet,10,1
+Laptop,150,20
+Desktop,300,100
+Monitor,150,50
+Food,10,40
+Briefcase,10,50
+Picture,10,50
+Painting,30,55
+Car,5000,800
+Front Door,10,100
+Pet Bird,2,30
+Pet Dog,3,50
+Pet Cat,3,40
+Fur Coat,30,30
+Shoes,1,5
+Razor,5,10
+Liquor,19,7
+Cigarettes,1,3
+Cheese,1.4,2
+Hammer,7,20
+CDs,3,1
+XBox,20,15
